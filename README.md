@@ -13,7 +13,7 @@ Hetzner.
 
 | Layer            | Choice                                                        |
 | ---------------- | ------------------------------------------------------------- |
-| Framework        | Next.js 15 (App Router, React 19, `output: "standalone"`)     |
+| Framework        | Next.js 15 (App Router, React 19)                             |
 | Language         | TypeScript (strict)                                           |
 | Styling          | Tailwind CSS 4 + ported design system in `globals.css`        |
 | Validation       | zod                                                           |
@@ -127,8 +127,11 @@ Traefik/Nginx, or any infrastructure.
 1. Push to `main`. Coolify is configured to build and deploy automatically.
 2. Set the environment variables (§4 / §5) in the Coolify app settings — never
    commit `.env`.
-3. `next.config.ts` uses `output: "standalone"`, which Coolify's Nixpacks/Docker
-   build serves directly.
+3. Coolify builds with **Nixpacks** (no custom Dockerfile): it runs
+   `pnpm install --frozen-lockfile`, then `pnpm build`, then serves the app with
+   `pnpm start` (`next start`) against the regular `.next` output. `next start`
+   listens on `$PORT`, which Coolify provides. No `output: "standalone"` is
+   needed (it would only matter for a hand-written minimal Docker image).
 
 Required for production:
 
@@ -137,6 +140,21 @@ Required for production:
 | `NEXT_PUBLIC_SITE_URL` | Canonical origin, e.g. `https://soudagemobilesm.ca`    |
 
 The `sitemap.xml` and `robots.txt` are generated from this value.
+
+### Troubleshooting: `ERROR  packages field missing or empty`
+
+If a Nixpacks build fails at `pnpm install` with this message, the repo contains
+a **`pnpm-workspace.yaml`** that has no `packages:` list. pnpm 10 writes that
+file locally to record build-script approvals; pnpm 9 (used on the build server)
+treats any such file as a workspace root and rejects it. This is **not** a
+single-package project, so the fix is simply:
+
+```bash
+git rm pnpm-workspace.yaml && git commit -m "remove stray pnpm workspace file"
+```
+
+The `"packageManager": "pnpm@9.15.9"` pin in `package.json` keeps local installs
+on the same pnpm major as CI (via Corepack), which prevents this from recurring.
 
 ---
 
