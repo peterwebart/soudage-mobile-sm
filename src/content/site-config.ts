@@ -3,10 +3,9 @@ import type { LocaleString } from "@/lib/i18n";
 /**
  * Single source of truth for company identity and contact details.
  *
- * ⚠ The phone, email and address below are PLACEHOLDERS carried over from the
- * design and must be confirmed before launch (the footer surfaces a visible
- * notice while `contactConfirmed` is false). Update here once and every
- * reference across the site — header, footer, schema, JSON-LD — updates.
+ * Update here once and every reference across the site — header, footer,
+ * schema, JSON-LD — updates. While `contactConfirmed` is false, the footer
+ * shows a "to be confirmed" notice and the phone is omitted from JSON-LD.
  */
 
 export const siteConfig = {
@@ -26,16 +25,16 @@ export const siteConfig = {
   } satisfies LocaleString,
 
   /** Set to true once the details below are verified for production. */
-  contactConfirmed: false,
+  contactConfirmed: true,
 
   phone: {
     /** Human-readable, formatted for display. */
-    display: "+1 (514) 000-0000",
-    /** E.164-ish value for tel: links. */
-    href: "tel:+15140000000",
+    display: "(438) 680-3247",
+    /** E.164 value for tel: links. */
+    href: "tel:+14386803247",
   },
 
-  email: "info@soudagemobilesm.ca",
+  email: "office@soudagemobile.ca",
 
   area: {
     fr: "Grand Montréal & Québec",

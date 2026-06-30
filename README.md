@@ -113,9 +113,22 @@ environment variable:
 Attachments (photos, drawings, PDFs) are accepted and their names/sizes are
 included in the notification. Binary **storage** activates with Payload in phase 2.
 
-Recommended setup for launch: create a Resend API key, verify the sending domain,
-and set `RESEND_API_KEY` + `LEADS_EMAIL_TO`. Optionally also set `LEADS_WEBHOOK_URL`
-to push leads into a CRM/automation.
+Notifications are sent **to `office@soudagemobile.ca`** by default
+(`LEADS_EMAIL_TO`), and the email's **reply-to is set to the customer's address**
+— so replying from the inbox goes straight to the person who requested the quote.
+
+**To turn email on (required for delivery):**
+
+1. Create a Resend account and add the domain **`soudagemobile.ca`** at
+   https://resend.com → Domains, then add the DNS records it shows (SPF/DKIM).
+   This is what lets the `no-reply@soudagemobile.ca` sender deliver.
+2. Create an API key (Resend → API Keys) and set `RESEND_API_KEY` in Coolify.
+3. `LEADS_EMAIL_TO` already defaults to `office@soudagemobile.ca`; override it
+   only to send elsewhere.
+
+Until `RESEND_API_KEY` is set the form still works and every lead is logged in
+Coolify — but no email is sent. (Optionally also set `LEADS_WEBHOOK_URL` to push
+leads into a CRM/automation.)
 
 ---
 
@@ -187,22 +200,24 @@ contained change.
 
 ---
 
-## 8. Before launch — confirm contact details
+## 8. Contact details
 
-The phone, email and address are **placeholders** carried over from the design.
-While `siteConfig.contactConfirmed` is `false`, the footer shows a visible
-reminder and the JSON-LD omits the phone number.
-
-Update once in **`src/content/site-config.ts`**:
+Contact details are **confirmed and live** (`contactConfirmed: true`), so the
+footer launch reminder is off and the phone is included in the JSON-LD. They live
+in one place — **`src/content/site-config.ts`** — and every reference (header,
+footer, schema, emergency band, quote aside) reads from it:
 
 ```ts
-contactConfirmed: true,                 // flips off the launch reminder
-phone: { display: "+1 (514) …", href: "tel:+1514…" },
-email: "info@soudagemobilesm.ca",       // confirm/replace
+contactConfirmed: true,
+phone: { display: "(438) 680-3247", href: "tel:+14386803247" },
+email: "office@soudagemobile.ca",
 ```
 
-Every reference across the site (header, footer, schema, emergency band) updates
-from this one place.
+> Note the email domain is **`soudagemobile.ca`**, which differs from the
+> canonical site domain currently configured for SEO
+> (`NEXT_PUBLIC_SITE_URL` / fallback `https://soudagemobilesm.ca`). If the live
+> site is actually on `soudagemobile.ca`, update `NEXT_PUBLIC_SITE_URL`
+> accordingly so canonical URLs, Open Graph and the sitemap match.
 
 ---
 

@@ -74,8 +74,11 @@ async function sendViaResend(lead: Lead): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) return;
 
-  const to = process.env.LEADS_EMAIL_TO?.trim() || "info@soudagemobilesm.ca";
-  const from = process.env.LEADS_EMAIL_FROM?.trim() || "Soudage Mobile SM <noreply@soudagemobilesm.ca>";
+  // Recipient: the business inbox. Override per environment with LEADS_EMAIL_TO.
+  const to = process.env.LEADS_EMAIL_TO?.trim() || "office@soudagemobile.ca";
+  // Sender must be on a Resend-verified domain (soudagemobile.ca).
+  const from =
+    process.env.LEADS_EMAIL_FROM?.trim() || "Soudage Mobile SM <no-reply@soudagemobile.ca>";
 
   const subjectName = lead.company || lead.name;
   const urgencyTag = lead.urgency ? ` [${lead.urgency}]` : "";
@@ -89,6 +92,7 @@ async function sendViaResend(lead: Lead): Promise<void> {
     body: JSON.stringify({
       from,
       to: [to],
+      // Replies from the business inbox go straight to the customer.
       reply_to: lead.email,
       subject: `Quote request — ${subjectName}${urgencyTag}`,
       text: formatLeadText(lead),

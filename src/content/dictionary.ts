@@ -70,7 +70,7 @@ export const hero = {
     title: { fr: "Capacités sur site", en: "On-site capability" } satisfies LocaleString,
     rows: [
       { label: { fr: "Procédés", en: "Processes" }, value: { fr: "SMAW · GMAW · FCAW · GTAW", en: "SMAW · GMAW · FCAW · GTAW" } },
-      { label: { fr: "Matériaux", en: "Materials" }, value: { fr: "Acier · Inox · Aluminium", en: "Steel · Stainless · Aluminum" } },
+      { label: { fr: "Matériaux", en: "Materials" }, value: { fr: "Acier · Inox", en: "Steel · Stainless" } },
       { label: { fr: "Secteur", en: "Focus" }, value: { fr: "Industriel & commercial", en: "Industrial & commercial" } },
       { label: { fr: "Zone", en: "Coverage" }, value: { fr: "Grand Montréal & Québec", en: "Greater Montreal & Quebec" } },
       { label: { fr: "Urgence", en: "Emergency" }, value: { fr: "Sur appel · 24/7", en: "On-call · 24/7" } },
@@ -252,7 +252,7 @@ export const quoteSection = {
       { fr: "Maintenance industrielle", en: "Industrial maintenance" },
       { fr: "Soudage d'urgence", en: "Emergency welding" },
       { fr: "Fabrication sur mesure", en: "Custom fabrication" },
-      { fr: "Soudage inox / aluminium", en: "Stainless / aluminum welding" },
+      { fr: "Soudage de l'inox", en: "Stainless steel welding" },
       { fr: "Équipement lourd", en: "Heavy equipment" },
     ],
     urgencyOptions: [

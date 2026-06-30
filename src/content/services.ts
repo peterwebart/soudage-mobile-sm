@@ -50,8 +50,8 @@ export const services: ServiceItem[] = [
     icon: "blueprint",
     title: { fr: "Fabrication sur mesure", en: "Custom fabrication" },
     description: {
-      fr: "Fabrication sur mesure en acier, acier inoxydable et aluminium selon les plans, spécifications ou exigences du site.",
-      en: "Custom steel, stainless steel and aluminum fabrication based on client drawings, specifications or site requirements.",
+      fr: "Fabrication sur mesure en acier et acier inoxydable selon les plans, spécifications ou exigences du site.",
+      en: "Custom steel and stainless steel fabrication based on client drawings, specifications or site requirements.",
     },
   },
   {
@@ -65,15 +65,6 @@ export const services: ServiceItem[] = [
   },
   {
     number: "07",
-    icon: "layers",
-    title: { fr: "Soudage de l'aluminium", en: "Aluminum welding" },
-    description: {
-      fr: "Soudage professionnel de l'aluminium pour structures, équipements, réparations et fabrication sur mesure.",
-      en: "Professional aluminum welding for structures, equipment, repairs and custom fabrication.",
-    },
-  },
-  {
-    number: "08",
     icon: "truck",
     title: { fr: "Réparation d'équipement lourd", en: "Heavy equipment repair" },
     description: {
