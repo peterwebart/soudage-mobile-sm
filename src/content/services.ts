@@ -6,6 +6,8 @@ export type ServiceItem = {
   icon: IconName;
   title: LocaleString;
   description: LocaleString;
+  /** Optional link to a service landing page (by service-pages key). */
+  pageKey?: string;
 };
 
 export const services: ServiceItem[] = [
@@ -20,6 +22,7 @@ export const services: ServiceItem[] = [
   },
   {
     number: "02",
+    pageKey: "structural-steel-repair",
     icon: "beam",
     title: { fr: "Réparation d'acier structural", en: "Structural steel repair" },
     description: {
@@ -29,6 +32,7 @@ export const services: ServiceItem[] = [
   },
   {
     number: "03",
+    pageKey: "industrial-maintenance",
     icon: "gear",
     title: { fr: "Maintenance industrielle", en: "Industrial maintenance" },
     description: {
@@ -38,6 +42,7 @@ export const services: ServiceItem[] = [
   },
   {
     number: "04",
+    pageKey: "emergency-welding",
     icon: "bolt",
     title: { fr: "Soudage d'urgence", en: "Emergency welding" },
     description: {
@@ -47,6 +52,7 @@ export const services: ServiceItem[] = [
   },
   {
     number: "05",
+    pageKey: "custom-fabrication",
     icon: "blueprint",
     title: { fr: "Fabrication sur mesure", en: "Custom fabrication" },
     description: {
@@ -56,6 +62,7 @@ export const services: ServiceItem[] = [
   },
   {
     number: "06",
+    pageKey: "stainless-steel-welding",
     icon: "shield",
     title: { fr: "Soudage de l'inox", en: "Stainless steel welding" },
     description: {

@@ -12,7 +12,9 @@ import { StickyQuote } from "@/components/site/StickyQuote";
 import { Trust } from "@/components/site/Trust";
 import { UtilityBar } from "@/components/site/UtilityBar";
 import { WhyUs } from "@/components/site/WhyUs";
-import type { Locale } from "@/lib/i18n";
+import { Faq } from "@/components/site/Faq";
+import { generalFaqs } from "@/content/service-pages";
+import { t, type Locale } from "@/lib/i18n";
 
 type SitePageProps = {
   locale: Locale;
@@ -36,6 +38,12 @@ export function SitePage({ locale }: SitePageProps) {
         <Projects locale={locale} />
         <Trust locale={locale} />
         <ServiceArea locale={locale} />
+        <Faq
+          id="faq"
+          kicker={t({ fr: "Questions fréquentes", en: "Frequently asked" }, locale)}
+          title={t({ fr: "Foire aux questions", en: "Frequently asked questions" }, locale)}
+          items={generalFaqs.map((f) => ({ question: t(f.q, locale), answer: t(f.a, locale) }))}
+        />
         <QuoteSection locale={locale} />
         <EmergencyBand locale={locale} />
       </main>

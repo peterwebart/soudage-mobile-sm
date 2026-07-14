@@ -45,6 +45,11 @@ export const siteConfig = {
   region: "QC",
   country: "CA",
 
+  /** Official social profiles (used in schema sameAs + Open Graph). */
+  social: {
+    facebook: "https://www.facebook.com/profile.php?id=61590891564250",
+  },
+
   emergency: {
     fr: "Intervention d'urgence 24/7",
     en: "24/7 emergency response",
